@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Snake-Coders Lab Project</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="https://www.gstatic.com/firebasejs/3.5.1/firebase.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="app.js"></script>
+</head>
+
+<body>
+    <div id="MainMenu">
+        <h1 id="title">Snake</h1>
+        <p id="author">by Ceoltoir</p>
+        <a href="#" id="start"><span class="blink">Click here to start<br> THE GAME</span></a>
+        <a href="#" id="lastScore">Last score: <span class="lastOne blink"></span></a>
+        <a href="#" id="highscore"><span class="blink">HIGHSCORES</span></a>
+        <a href="#" id="creditsLink">credits</a>
+        <p id="controlls_info">
+            MOVEMENT: &#8592; &#8593; &#8594; &#8595; <br> SPACEBAR: RESUME; <br> P: PAUSE; <br> HOLD SPACEBAR: ACCELERATE!;
+        </p>
+    </div>
+    <div id="endMenu">
+        <h2>You lost!</h2>
+        <p class="finalScore">Final score: <span class="blink" id="scoreValue"></span></p>
+        <form>
+          <input type="text" name="score" class="score_form" id="scoreName">
+          <input type="submit" name="score" value="SUBMIT" class="score_form" id="scoreSubmit">
+        </form>
+        <a href="#" class="blink playAgain">PLAY AGAIN</a>
+        <a href="#" class="returnMain blink">RETURN</a>
+
+    </div>
+    <div id="credits">
+      <h3>Special thanks to:</h3>
+      <p> blackMyriad: testing</p>
+      <p> Asia-san: #first_player</p>
+      <p> Marcin_2: Game Development Help</p>
+      <p> Jacek: Za bycie Jackiem</p>
+      <p> All sounds used in this game are on Creative Commons license<br>Downloaded from: www.freesound.org</p>
+      <p> gameMusic: Terra Incognita - artist: Alexander Blu;</p>
+      <a href="#" class="returnMain blink">RETURN</a> <!--Dodać w app.js aby usuwało też display z endMenu -->
+    </div>
+    <div id="highscores">
+      <p>  SCOREBOARD: </p>
+      <ul id="list">
+
+      </ul>
+      <a href="#" class="returnMain blink">RETURN</a>
+
+    </div>
+    <canvas id="canvas" width="600" height="600"></canvas>
+    <audio autoplay id="mainMenuMusic">
+      <source src="sounds/mainMenuMusic.wav" type="audio/wav">
+    </audio>
+    <audio id="wallHit">
+      <source src="sounds/wallHit.wav" type="audio/wav">
+    </audio>
+    <audio id="foodEat">
+      <source src="sounds/foodEat.wav" type="audio/wav" >
+    </audio>
+    <audio id="gameMusic">
+      <source src="sounds/incognita.mp3" type="audio/mp3">
+    </audio>
+</body>
+
+</html>
