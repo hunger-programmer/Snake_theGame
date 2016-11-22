@@ -11,7 +11,7 @@
 /*GENERAL*/
 
 * {
-    font-family: "NES";
+    font-family: "NES"; /* DO html,body nie musi być '*' */
 }
 
 body {
@@ -24,7 +24,7 @@ body {
 h2 {
     position: relative;
     z-index: 1;
-    font: 50px "NES";
+    font: 50px "NES"; /* font-size */
     color: white;
     text-align: center;
     margin: 0;
@@ -63,7 +63,7 @@ ul {
     top: 50%;
     left: 40%;
     margin-left: -100px;
-    /* half width*/
+    /* half width RWD Panie co to za px na sztywno?*/
     margin-top: -300px;
     /* half height*/
 }
@@ -71,7 +71,7 @@ ul {
 #MainMenu h1, p {
     position: relative;
     z-index: 1;
-    font: 50px "NES";
+    font: 50px "NES"; /*font-size*/
     color: white;
     text-align: center;
     margin: 0;
@@ -145,7 +145,7 @@ ul {
     z-index: 15;
     width: 600px;
     height: 600px;
-    background: black;
+    background: black; /* Lepiej #000 - nie każda przeglądarka musi mieć black */
     top: 50%;
     left: 40%;
     margin-left: -100px;
@@ -183,7 +183,7 @@ ul {
 .finalScore {
     position: relative;
     z-index: 1;
-    font: 20px "NES";
+    font: 20px "NES"; /*font-sie*/
     color: white;
     text-align: center;
     margin: 0;
@@ -210,7 +210,7 @@ ul {
     animation: blinker 1s linear infinite;
 }
 
-@keyframes blinker {
+@keyframes blinker { /* A co ze statymi przeglądarkami? @-webik-keyframes.. */
     50% {
         opacity: 0;
     }

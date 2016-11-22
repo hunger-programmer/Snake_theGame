@@ -11,7 +11,7 @@ $(document).ready(function() {
         };
         firebase.initializeApp(config);
         data = firebase.database().ref().child("score");
-        var ulList = $('#list')[0];
+        var ulList = $('#list')[0]; //Get document.getElementById()
         data.on('child_added', snap => {
             var li = document.createElement('li');
             li.id = snap.key;
@@ -28,6 +28,9 @@ $(document).ready(function() {
     /********************FIREBASE_END*******************************/
     //AUDIO files
     var foodEat = $("#foodEat");
+    //zamiast wrzucać do html'a dzwięki lepiej:
+    /*var audio = new Audio('audio_file.mp3');
+    audio.play();*/
     var mainMenuMusic = $("#mainMenuMusic");
     var wallHit = $("#wallHit");
     var gameMusic = $("#gameMusic");
@@ -36,7 +39,7 @@ $(document).ready(function() {
 
     //GO TO CREDITS
     $("#creditsLink").on("click", function() {
-            MainMenu.style.zIndex = "-1";
+            MainMenu.style.zIndex = "-1"; //dupa - zadeklaruj sobie var MainMenu = $('#MainMenu') i potem MainMenu.css({z-index: -1, display: block});
             credits.style.display = "block"
         })
         //RETURN
@@ -60,9 +63,9 @@ $(document).ready(function() {
         game_loop();
     });
     /***************************GLOBAL VARS*****************************/
-    var canvas = $("canvas")[0];
+    var canvas = $("canvas")[0]; //Znowu albo jQ albo js
     var ctx = canvas.getContext("2d");
-    var width = $("canvas").width();
+    var width = $("canvas").width(); // zakeszuj canvas'a
     var height = $("canvas").height();
     var cw = 10;
     var game_speed = 100;
@@ -77,7 +80,8 @@ $(document).ready(function() {
         food_create2();
         score = 0;
         movement = 'right';
-        if (typeof interval != "undefined") clearInterval(interval);
+        if (interval !== undefined)
+            clearInterval(interval);
         interval = setInterval(timer, game_speed - Math.round(score / 2));
     }
     /*******************************TIMER**************************************/
@@ -108,13 +112,15 @@ $(document).ready(function() {
     }
 
     function food_create() {
+    	//VAR!!!
         food = {
             x: Math.round(Math.random() * (width / cw - cw)),
-            y: Math.round(Math.random() * (height / cw - cw)),
+            y: Math.round(Math.random() * (height / cw - cw))
         };
     }
 
     function food_create2() {
+		//VAR!!!
         food2 = {
             x: Math.round(Math.random() * (width / cw - cw)),
             y: Math.round(Math.random() * (height / cw - cw)),
@@ -133,7 +139,7 @@ $(document).ready(function() {
         if (movement == "right") pos_x++;
         else if (movement == "left") pos_x--;
         else if (movement == "up") pos_y--;
-        else if (movement == "down") pos_y++;
+        else if (movement == "down") pos_y++; //lepszu bylby switch
         /***************COLLISION SNAKE-SNAKE***************/
         function collision(x, y, array) {
             for (var i = 0; i < array.length; i++) {
@@ -146,17 +152,17 @@ $(document).ready(function() {
         if (pos_x == -1 || pos_x == width / cw || pos_y <= -1 || pos_y >= height / cw || collision(pos_x, pos_y, snake_array)) //Dlaczego pos_y nie moze byc == -1;
         {
             wallHit[0].play();
-            gameMusic[0].pause();
+            gameMusic[0].pause();//jsem dzwięki nie z html'a
             interval = false;
             $("#endMenu").show();
             $("#scoreValue").text(score);
-            $("#scoreSubmit").one("click", function(e){
+            $("#scoreSubmit").one("click", function(e){ //formatowanie kodu w tym całym bloku
               e.preventDefault();
 
             data.once("value").then(function(snap) {
                 var scoreArr = snap.val();
 
-                function smallest(scoreArr) {
+                function smallest(scoreArr) { //do refactora - nie czaje ocb tutaj chodzi
                     var x = [$("#scoreName").val(), score ];
                     if (scoreArr[9][1] < x[1]) {
                         scoreArr.pop();
@@ -170,13 +176,15 @@ $(document).ready(function() {
                 smallest(scoreArr);
                 var highscoreRef = firebase.database().ref();
                 highscoreRef.set({
-                    "score": scoreArr,
+                    "score": scoreArr
                 });
             });
-            return;
+
+            return; //Return false
+
             });
             $(".playAgain").on("click", function() {
-                $("#endMenu").hide();
+                $("#endMenu").hide(); //zakeszuj to
                 gameMusic[0].play();
                 game_loop();
             });
@@ -197,14 +205,14 @@ $(document).ready(function() {
         if ((pos_x == food.x && pos_y == food.y)) {
             var add = {};
             foodEat[0].play();
-            snake_array.push(add)
+            snake_array.push(add); // ??Nie łatwiej snake_array.push({}); ??
             score++;
             food_create();
         }
         if ((pos_x == food2.x && pos_y == food2.y)) {
             var add = {};
             foodEat[0].play();
-            snake_array.push(add)
+            snake_array.push(add); // ??Nie łatwiej snake_array.push({}); ??
             score++;
             food_create2();
 
@@ -265,7 +273,8 @@ $(document).ready(function() {
         var key = e.which;
         if (key == "80") // P PAUZA
             pauseme();
-        else if (key == "32") // SPACEBAR HOLD - ACCELERATE! / SPACEBAR - RESUME
+
+		if (key == "32") // SPACEBAR HOLD - ACCELERATE! / SPACEBAR - RESUME //lepiej wygląda parę ifów pod sobą w takim casie bo warunki powyższe odpowiadają za różna logikę
             timer();
     });
 });
